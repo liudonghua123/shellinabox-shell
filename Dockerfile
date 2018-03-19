@@ -1,6 +1,8 @@
 FROM ubuntu:latest
 
-MAINTAINER liudonghua123 version: 0.1
+MAINTAINER liudonghua123 <liudonghua123@gmail.com>
+
+ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update
 
