@@ -19,6 +19,7 @@ services:
         restart: always
 ```
 4. run `docker-compose up -d`
+5. visit your shell endpoints via `http://<your_ip_or_domain_name>:4200/[python/ipython/python3/ipython3/cling]`
 
 ### License
 
