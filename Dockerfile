@@ -31,7 +31,7 @@ RUN cmake --build . --target install
 COPY ["shellinabox-themes", "/usr/local/share/shellinabox"]
 
 # install other utilities
-RUN apt-get -y install python3 ipython
+RUN apt-get -y install python python3 ipython ipython3
 
 # create non-root user and change WORKDIR
 RUN useradd -ms /bin/bash shell
@@ -42,5 +42,12 @@ WORKDIR /home/shell
 RUN echo "root:root" | chpasswd
 RUN echo "shell:shell" | chpasswd
 
-CMD ["shellinaboxd", "-t", "-s", "/:LOGIN", "-s", "/python:shell:shell:HOME:/usr/bin/python", "-s", "/ipython:shell:shell:HOME:/usr/bin/ipython", "-s", "/python3:shell:shell:HOME:/usr/bin/python3", "-s", "/ipython3:shell:shell:HOME:/usr/bin/ipython3", "-s", "/cling:shell:shell:HOME:/usr/local/bin/cling", "--static-file=styles.css:/usr/local/share/shellinabox/shellinabox.css", "--user-css=Tomorrow Light:+/usr/local/share/shellinabox/theme-tomorrow-light.css,Tomorrow Dark:-/usr/local/share/shellinabox/theme-tomorrow-dark.css"]
+CMD ["shellinaboxd", "-t", "-s", "/:LOGIN", \
+"-s", "/python:shell:shell:HOME:/usr/bin/python", \
+"-s", "/ipython:shell:shell:HOME:/usr/bin/ipython", \
+"-s", "/python3:shell:shell:HOME:/usr/bin/python3", \
+"-s", "/ipython3:shell:shell:HOME:/usr/bin/ipython3", \
+"-s", "/cling:shell:shell:HOME:/usr/local/bin/cling", \
+"--static-file=styles.css:/usr/local/share/shellinabox/shellinabox.css", \
+"--user-css=Tomorrow Light:+/usr/local/share/shellinabox/theme-tomorrow-light.css,Tomorrow Dark:-/usr/local/share/shellinabox/theme-tomorrow-dark.css"]
 
