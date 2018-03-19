@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+    shellinabox-shell:
+        build: .
+        image: liudonghua123/shellinabox-shell:latest
+        ports:
+            - "5200:4200"
+        restart: always
