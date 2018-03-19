@@ -7,31 +7,23 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update
 
 # install build prerequisites
-RUN apt-get -y install git build-essential cmake
+RUN apt-get -y install git build-essential cmake python
 
 # build cling
 RUN mkdir -p /code
-RUN cd /code
-RUN git clone http://root.cern.ch/git/llvm.git src
-RUN cd /code/src
-RUN git checkout cling-patches
+RUN cd /code  && git clone http://root.cern.ch/git/llvm.git src
 RUN mkdir -p /code/src/tools
-RUN cd /code/src/tools
-RUN git clone http://root.cern.ch/git/cling.git
-RUN git clone http://root.cern.ch/git/clang.git
-RUN cd /code/src/tools/clang
-RUN git checkout cling-patches
-RUN cd /code/
-RUN mkdir build
-RUN cd /code/build
-RUN apt-get -qq -y install python
+RUN cd /code/src/tools && git clone http://root.cern.ch/git/cling.git
+RUN cd /code/src/tools && git clone http://root.cern.ch/git/clang.git
+RUN cd /code/src/tools/clang && git checkout cling-patches
+RUN mkdir -p /code/build
+WORKDIR /code/build
 RUN cmake -DCMAKE_INSTALL_PREFIX=/usr/local -DCMAKE_BUILD_TYPE=Release ../src
 RUN cmake --build .
 RUN cmake --build . --target install
 
 # install shellinabox
 RUN apt-get -y install shellinabox
-
 # copy shellinabox themes
 COPY ["shellinabox-themes", "/usr/local/share/shellinabox"]
 
