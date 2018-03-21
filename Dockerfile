@@ -12,6 +12,7 @@ RUN apt-get -y install git build-essential cmake python
 # build cling
 RUN mkdir -p /code
 RUN cd /code  && git clone http://root.cern.ch/git/llvm.git src
+RUN cd /code/src/ && git checkout cling-patches
 RUN mkdir -p /code/src/tools
 RUN cd /code/src/tools && git clone http://root.cern.ch/git/cling.git
 RUN cd /code/src/tools && git clone http://root.cern.ch/git/clang.git
